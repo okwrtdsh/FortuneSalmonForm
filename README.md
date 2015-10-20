@@ -6,13 +6,13 @@
 ### Macの場合
 
 ```
-open /Applications/Google\ Chrome.app/ --args --disable-web-security ./index.html
+open /Applications/Google\ Chrome.app/ --args --disable-web-security
 ```
 
 ### Windowsの場合
 
 ```
-chrome.exe --disable-web-security ./index.html
+chrome.exe --disable-web-security
 ```
 
 ## URLを適宜調整
