@@ -16,6 +16,9 @@ chrome.exe --disable-web-security
 ```
 
 ## URLを適宜調整
-* https://github.com/okwrtdsh/FortuneSalmonForm/blob/master/index.html#L77
-* https://github.com/okwrtdsh/FortuneSalmonForm/blob/master/index.html#L131
-* https://github.com/okwrtdsh/FortuneSalmonForm/blob/master/index.html#L157
+パラメータでHOSTとPORTを設定(デフォルトはhttp://localhost:8080)
+
+例
+```
+index.html?HOST=192.168.11.2&PORT=8080
+```
