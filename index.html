@@ -17,6 +17,7 @@
     <script src="./js/bootstrap-datepicker.js" type="text/javascript"></script>
     <link href="./css/datepicker3.css" rel="stylesheet" type="text/css" media="screen,projection" />
     <script src="./js/bootstrap-datepicker.ja.js" type="text/javascript"></script>
+    <script src="./js/fortune_salman_form.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(function(){
         $('.set_datepicker :input,.set_datepicker:input')
@@ -46,132 +47,6 @@
         text-align: center;
       }
     </style>
-    <script type="text/javascript">
-      function formIsValid(){
-        var is_valid = true;
-        var list = ["family_name", "name", "birth_day"]
-        for(var i of list){
-          if($("input[name="+i+"]").val()){
-            $("#"+i).removeClass("alert-danger");
-            $("#"+i+"_error").hide();
-          }
-          else{
-            $("#"+i).addClass("alert-danger");
-            $("#"+i+"_error").show();
-            is_valid = false;
-          }
-        }
-        if($("input[name=fortune_telling_names]:checked").length){
-          $("#fortune_telling_names").removeClass("alert-danger");
-          $("#fortune_telling_names_error").hide();
-        }
-        else{
-          $("#fortune_telling_names").addClass("alert-danger");
-          $("#fortune_telling_names_error").show();
-          is_valid = false;
-        }
-        return is_valid;
-      }
-      function ajaxGet(parameter){
-        //var url = location.href.replace("/form/","") +"/api/create.json?"+ parameter;
-        var url = "http://localhost:8080/api/create.json?"+ parameter;
-        console.log(url);
-        var error = false;
-        $.ajax({
-          type: 'get',
-          scriptCharset: 'utf-8',
-          dataType:'json',
-          url: url,
-          xhrFields: {withCredentials: true}
-        }).done(function(json, status, xhr) {
-          if(json["status"] == "success"){
-            var id = json["data"]["id"];
-            console.log(id);
-            printFortuneTelling(id);
-            error = false;
-          }
-          else{
-            console.log("エラーが発生しました");
-            console.log(json);
-            error = true;
-          }
-        }).fail(function(xhr, status, err){
-          console.log("通信エラーが発生しました");
-          console.log(xhr);
-          error = true;
-        });
-        return !error;
-      }
-      function postFortunetelling(){
-        var $objects = $("input[name=fortune_telling_names]:checked");
-        var family_name = $("input[name=family_name]").val();
-        var name = $("input[name=name]").val();
-        var date = $("input[name=birth_day]").val().split("-");
-        if (formIsValid()){
-          for(var i = 0; i < $objects.length; i++){
-            var $obj = $($objects[i]);
-            var fortune_telling_name = $obj.val();
-            var parameter = "family_name="+family_name+"&name="+name+"&year="+date[0]+"&month="+date[1]+"&date="+date[2]+"&"+fortune_telling_name+"=1"
-            var res = ajaxGet(parameter);
-            if(!res){
-              alert("エラーが発生しました");
-              return false;
-            }
-          }
-          $("#form").hide();
-          $("#submit").show();
-          return false;
-        }
-        else{
-          return false;
-        }
-      }
-      function renderFortuneTelling(){
-        //var url = location.href.replace("/form/","") + "/api/get_workers.json";
-        var url = "http://localhost:8080/api/get_workers.json";
-        console.log(url);
-        $.ajax({
-          type: 'get',
-          scriptCharset: 'utf-8',
-          dataType:'json',
-          url: url,
-          xhrFields: {withCredentials: true}
-        }).done(function(json, status, xhr) {
-          var workers = json["workers"];
-          var li_souce = ""
-          for(var i = 0; i < workers.length; i++){
-            if(workers[i]["display_to_client"]){
-              var name = workers[i]["name"];
-              var description = workers[i]["description"];
-              li_souce +='<li><label for="'+name+'" class="checkbox"><input name="fortune_telling_names" id="'+name+'" value="'+name+'" type="checkbox" /><label for="'+name+'">'+description+'</label></li>';
-            }
-          }
-          $("#fortune_telling_names").children("td").children("ul").html(li_souce);
-        }).fail(function(xhr, status, err){
-          alert("通信エラーが発生しました");
-          console.log(xhr);
-        });
-      }
-      function printFortuneTelling(id){
-        //var url = location.href.replace("/form/","") + "/api/exec.json?id="+id;
-        var url = "http://localhost:8080/api/exec.json?id="+id;
-        console.log(url);
-        $.ajax({
-          type: 'get',
-          scriptCharset: 'utf-8',
-          dataType:'json',
-          url: url,
-          xhrFields: {withCredentials: true}
-        }).done(function(json, status, xhr) {
-          if(json["status"] != "success"){
-            alert("エラーが発生しました");
-          }
-        }).fail(function(xhr, status, err){
-          alert("通信エラーが発生しました");
-          console.log(xhr);
-        });
-      }
-    </script>
   </head>
   <body role="document">
     <div class="container">
