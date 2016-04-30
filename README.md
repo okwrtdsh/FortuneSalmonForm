@@ -6,13 +6,13 @@
 ### Macの場合
 
 ```
-open /Applications/Google\ Chrome.app/ --args --disable-web-security
+open /Applications/Google\ Chrome.app/ --args --disable-web-security --user-data-dir
 ```
 
 ### Windowsの場合
 
 ```
-chrome.exe --disable-web-security
+chrome.exe --disable-web-security --user-data-dir
 ```
 
 ## URLを適宜調整
