@@ -27,5 +27,8 @@ index.html?HOST=192.168.11.2&PORT=8080
 準備
 ```
 npm install
+```
+サーバ起動
+```
 npm start
 ```
