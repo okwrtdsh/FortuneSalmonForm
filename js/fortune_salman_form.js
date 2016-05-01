@@ -85,8 +85,7 @@ function renderFortuneTelling(){
     type: 'get',
     scriptCharset: 'utf-8',
     dataType:'json',
-    url: url,
-    xhrFields: {withCredentials: true}
+    url: url
   }).done(function(json, status, xhr) {
     var workers = json["workers"];
     var li_souce = ""
@@ -111,8 +110,7 @@ function printFortuneTelling(id){
     type: 'get',
     scriptCharset: 'utf-8',
     dataType:'json',
-    url: url,
-    xhrFields: {withCredentials: true}
+    url: url
   }).done(function(json, status, xhr) {
     if(json["status"] != "success"){
       alert("エラーが発生しました");
