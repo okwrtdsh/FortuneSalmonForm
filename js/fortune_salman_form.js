@@ -32,8 +32,7 @@ function ajaxGet(parameter){
     type: 'get',
     scriptCharset: 'utf-8',
     dataType:'json',
-    url: url,
-    xhrFields: {withCredentials: true}
+    url: url
   }).done(function(json, status, xhr) {
     if(json["status"] == "success"){
       var id = json["data"]["id"];
