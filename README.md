@@ -22,3 +22,10 @@ chrome.exe --disable-web-security --user-data-dir
 ```
 index.html?HOST=192.168.11.2&PORT=8080
 ```
+
+## サーバから返す場合
+準備
+```
+npm install
+npm start
+```
